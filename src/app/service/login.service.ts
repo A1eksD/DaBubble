@@ -96,8 +96,9 @@ export class loginService {
       const userDoc = snapshot.docs[0];
       this.currentUser = userDoc.id;
       this.getUserIdInLocalStorage(this.currentUser);
-      this.email = '';
-      this.password = '';
+      setTimeout(() => {
+        this.clearUserData();
+      }, 1500);
     } else {
       console.error('Kein zugehöriges Benutzerdokument gefunden.');
     }
@@ -137,8 +138,10 @@ export class loginService {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         this.getUserIdInLocalStorage(userId);
-        this.email = '';
-        this.password = '';
+        setTimeout(() => {
+          this.email = '';
+          this.password = '';
+        }, 1500);
       })
       .catch((error) => {
         console.error(error);
